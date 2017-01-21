@@ -10,21 +10,22 @@
 	</script>
 	<script src="controllers/sportsStore.js"></script>
 	<script src="filters/customFilters.js"></script>
+	<script src="controllers/productListControllers.js"></script>
 </head>
 <body ng-controller="sportsStoreCtrl">
 	<div class="navbar navbar-inverse" style="border-radius: 0px;">
 		<a class="navbar-brand" href="javascript:void(0)">SPORTS STORE</a>
 	</div>
 	<div>
-		<div class="panel panel-default row">
+		<div class="panel panel-default row" ng-controller="productListCtrl">
 			<div class="col-xs-3">
-				<a ng-click="selectCategory" class="btn btn-block btn-default btn-lg">Home</a>
+				<a ng-click="selectCategory()" class="btn btn-block btn-default btn-lg">Home</a>
 				<a ng-repeat="item in data.products | orderBy :'category' | unique : 'category'" ng-click="selectCategory(item)" class="btn btn-block btn-default btn-lg"> {{item}}
 				</a>
 			</div>
 
 			<div class="col-xs-8">
-				<div class="well" ng-repeat="item in data.products">
+				<div class="well" ng-repeat="item in data.products | filter : categoryFilterFn">
 					<h3>
 						<strong>{{item.name}}</strong>
 						<span class="pull-right label label-primary">
