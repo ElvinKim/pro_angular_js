@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html ng-app="sportStoreAdmin">
+<html ng-app="sportsStoreAdmin">
 <head>
 	<title>Administration</title>
 	<script src="angular/angular.min.js"></script>
 	<script src="ngmodules/angular-route.min.js"></script>
+	<script src="ngmodules/angular-resource.min.js"></script>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
 	<script>
-		angular.module("sportsStroeAdmin", ["ngRoute"])
+		angular.module("sportsStoreAdmin", ["ngRoute", "ngResource"])
 			.config(function($routeProvider) {
 				$routeProvider
 				.when("/login", {
@@ -22,6 +23,7 @@
 			});
 	</script>
 	<script src="controllers/adminControllers.js"></script>
+	<script src="controllers/adminProductControllers.js"></script>
 </head>
 <body>
 	<ng-view />
