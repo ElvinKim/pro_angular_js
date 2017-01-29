@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app=exampleApp>
+	<head>
+		<title>AngularJS Demo</title>
+		<script src="/angular/angular.min.js"></script>
+		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+		<script>
+			var myApp = angular.module("exampleApp", []);
+
+			myApp.controller("dayCtrl", function($scope) {
+				var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+				$scope.day = dayNames[new Date().getDay()];
+				$scope.tomorrow = dayNames[(new Date().getDay() + 1) % 7];
+			});
+
+		</script>
+	</head>
+
+	<body>
+		<div class="panel" ng-controller="dayCtrl">
+			<div class="page-header">
+				<h3>AngularJS App</h3>
+			</div>
+			<h4>Today is {{day || "(unknown)"}}</h4>
+			<h4>Tomorrow is {{tomorrow || "(unknown)"}}</h4>
+		</div>
+	</body>
+</html>
