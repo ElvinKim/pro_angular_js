@@ -30,18 +30,17 @@
 			<h3 class="panel-header">To Do List</h3>
 
 			<table class="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Action</th>
-						<th>Done</th>
-					</tr>
-				</thead>
 				<tbody>
-					<tr ng-repeat="item in todos" ng-class="$odd ? 'odd' : 'even'">
-						<td>{{$index + 1}}</td>
-						<td>{{item.action}}</td>
-						<td><span ng-if="$first || $last">{{item.complete}}</span></td>
+					<tr ng-repeat-start="item in todos">
+						<td>This is item {{$index}}</td>
+					</tr>
+					<tr>
+						<td>
+							The action is : {{item.action}}
+						</td>
+					</tr>
+					<tr ng-repeat-end style="border-bottom: 2px #555555 solid">
+						<td>Item {{$index}} is {{$item.complete ? '' : 'not'}} complete</td>
 					</tr>
 				</tbody>
 			</table>
