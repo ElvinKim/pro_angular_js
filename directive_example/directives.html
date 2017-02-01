@@ -28,22 +28,7 @@
 	<body>
 		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
 			<h3 class="panel-header">To Do List</h3>
-
-			<table class="table">
-				<tbody>
-					<tr ng-repeat-start="item in todos">
-						<td>This is item {{$index}}</td>
-					</tr>
-					<tr>
-						<td>
-							The action is : {{item.action}}
-						</td>
-					</tr>
-					<tr ng-repeat-end style="border-bottom: 2px #555555 solid">
-						<td>Item {{$index}} is {{$item.complete ? '' : 'not'}} complete</td>
-					</tr>
-				</tbody>
-			</table>
+			<ng-include src="'table.html'"></ng-include>
 		</div>
 	</body>
 </html>
