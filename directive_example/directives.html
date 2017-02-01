@@ -10,39 +10,41 @@
 			angular.module("exampleApp", [])
 				.controller("defaultCtrl", function($scope) {
 					$scope.todos = [
-						{ action : "Get groceries", done : false},
-						{ action : "Buy Flowers", done : false},
-						{ action : "Get Shoes", done : true},
-						{ action : "Collect Tickets", done : true},
-						{ action : "Call Joe", done : false},
+						{ action : "Get groceries", complete : false},
+						{ action : "Buy Flowers", complete : false},
+						{ action : "Get Shoes", complete : true},
+						{ action : "Collect Tickets", complete : true},
+						{ action : "Call Joe", complete : false},
 					];
 				});
 		</script>
+
+		<style>
+			.odd {background-color : lightcoral;}
+			.even {background-color: lavenderblush;}
+		</style>
 	</head>
 
 	<body>
 		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
 			<h3 class="panel-header">To Do List</h3>
 
-			<div class="well">
-				<div>The first item is : {{todos[0].action}}</div>
-			</div>
-
-			<div class="form-group well">
-				<label for="firstItem">Set First Item : </label>
-				<input name="firstItem" class="form-control" ng-model="todos[0].action" />
-			</div>
-
-			<div>There are {{todos.length}} items</div>
-			<div>
-				There are <span ng-bind="todos.length"></span> items
-			</div>
-			<div ng-bind-template="First : {{todos[0].action}}. Second : {{todos[1].action}}">
-			</div>
-
-			<div ng-non-bindable>
-				AngularJS uses {{ and }} characters for templates
-			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Action</th>
+						<th>Done</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in todos" ng-class="$odd ? 'odd' : 'even'">
+						<td>{{$index + 1}}</td>
+						<td>{{item.action}}</td>
+						<td>{{item.complete}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</body>
 </html>
