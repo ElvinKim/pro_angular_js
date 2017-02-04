@@ -15,34 +15,40 @@
 						{ action : "Get groceries", complete : false},
 						{ action : "Buy Flowers", complete : false},
 						{ action : "Get Shoes", complete : true},
-						{ action : "Collect Tickets", complete : true},
+						{ action : "Collect Tickets", complete : false},
 						{ action : "Call Joe", complete : false},
 					];
 
-					$scope.viewFile = function() {
-						return $scope.showList ? "list.html" : "table.html";
-					};
+					$scope.buttonNames = ["Red", "Green", "Blue"];
 
-					$scope.reportChange = function() {
-						console.log("Displayed content: " + $scope.viewFile());
+					$scope.settings = {
+						Rows : "Red",
+						Columns : "Green"
 					};
 				});
 		</script>
 		<style>
-			td > *:first-child {font-weight : bold;}
+			tr.Red { background-color: lightcoral;}
+			tr.Green { background-color: lightgreen;}
+			tr.Blue { background-color: lightblue;}
 		</style>
 	</head>
 
 	<body>
 		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
 			<h3 class="panel-header">To Do List</h3>
-			<div class="checkbox well">
-				<label>
-					<input type="checkbox" ng-model="todos[2].complete" />
-					Item 3 is complete
-				</label>
-				
+			<div class="row well">
+				<div class="col-xs-6" ng-repeat="(key, val) in settings">
+					<h4>{{key}}</h4>
+					<div class="radio" ng-repeat="button in buttonNames">
+						<label>
+							<input type="radio" ng-model="settings[key]" value="{{button}}" />
+							{{button}}
+						</label>
+					</div>
+				</div>
 			</div>
+
 			<table class="table">
 				<thead>
 					<tr>
@@ -51,12 +57,11 @@
 						<th>Done</th>
 					</tr>
 				</thead>
-				<tr ng-repeat="item in todos" ng-class="$odd ? 'odd' : 'even'">
+				<tr ng-repeat="item in todos" ng-class="settings.Rows">
 					<td>{{$index + 1}}</td>
 					<td>{{item.action}}</td>
-					<td>
-						<span ng-hide="item.complete">(Incomplete)</span>
-						<span ng-show="item.complete">(Done)</span>
+					<td ng-style="{'background-color' : settings.Columns}">
+						{{item.complete}}
 					</td>
 				</tr>
 			</table>
