@@ -9,38 +9,44 @@
 		<script>
 			angular.module("exampleApp", [])
 				.controller("defaultCtrl", function($scope) {
-					$scope.data = {};
 
-					$scope.todos = [
-						{ action : "Get groceries", complete : false},
-						{ action : "Buy Flowers", complete : false},
-						{ action : "Get Shoes", complete : true},
-						{ action : "Collect Tickets", complete : false},
-						{ action : "Call Joe", complete : false},
-					];
+					$scope.message = "Tap Me!!";
 
-					$scope.buttonNames = ["Red", "Green", "Blue"];
+					// $scope.data = {};
 
-					$scope.data = {
-						rowColor : "Blue",
-						columnColor : "Green"
-					};
+					// $scope.todos = [
+					// 	{ action : "Get groceries", complete : false},
+					// 	{ action : "Buy Flowers", complete : false},
+					// 	{ action : "Get Shoes", complete : true},
+					// 	{ action : "Collect Tickets", complete : false},
+					// 	{ action : "Call Joe", complete : false},
+					// ];
 
-					$scope.handleEvent = function(e) {
-						console.log("Event type : " + e.type);
-						$scope.data.columnColor = e.type == "mouseover" ? "Green" : "Blue";
+					// $scope.buttonNames = ["Red", "Green", "Blue"];
+
+					// $scope.data = {
+					// 	rowColor : "Blue",
+					// 	columnColor : "Green"
+					// };
+
+					// $scope.handleEvent = function(e) {
+					// 	console.log("Event type : " + e.type);
+					// 	$scope.data.columnColor = e.type == "mouseover" ? "Green" : "Blue";
+					// }
+				})
+				.directive('tap', function(){
+					return function(scope, elem, attrs) {
+						elem.on("touchstart touchend", function(){
+							scope.$apply(attrs['tap'])
+
+						});
 					}
 				});
 		</script>
-		<style>
-			.Red { background-color: lightcoral;}
-			.Green { background-color: lightgreen;}
-			.Blue { background-color: lightblue;}
-		</style>
 	</head>
 
 	<body>
-		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+<!-- 		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
 			<h3 class="panel-header">To Do List</h3>
 			<div class="well">
 				<span ng-repeat="button in buttonNames">
@@ -66,6 +72,13 @@
 					</td>
 				</tr>
 			</table>
+		</div>
+ -->
+		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+			<div class='well' tap="message = 'Tapped!'">
+				{{message}}
+			</div>
+
 		</div>
 	</body>
 </html>
