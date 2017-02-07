@@ -9,8 +9,7 @@
 		<script>
 			angular.module("exampleApp", [])
 				.controller("defaultCtrl", function($scope) {
-
-					$scope.message = "Tap Me!!";
+					$scope.dataValue = false;
 
 					// $scope.data = {};
 
@@ -33,20 +32,12 @@
 					// 	console.log("Event type : " + e.type);
 					// 	$scope.data.columnColor = e.type == "mouseover" ? "Green" : "Blue";
 					// }
-				})
-				.directive('tap', function(){
-					return function(scope, elem, attrs) {
-						elem.on("touchstart touchend", function(){
-							scope.$apply(attrs['tap'])
-
-						});
-					}
 				});
 		</script>
 	</head>
 
-	<body>
-<!-- 		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+	<body><!-- 		
+		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
 			<h3 class="panel-header">To Do List</h3>
 			<div class="well">
 				<span ng-repeat="button in buttonNames">
@@ -72,13 +63,17 @@
 					</td>
 				</tr>
 			</table>
-		</div>
- -->
-		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
-			<div class='well' tap="message = 'Tapped!'">
-				{{message}}
-			</div>
+		</div>-->
 
+		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+			<h3 class="panel-header">To Do List</h3>
+			<div class="checkbox well">
+				<label>
+					<input type="checkbox" ng-model="dataValue">
+					Set the Data Value
+				</label>
+			</div>
+			<button class="btn btn-success" ng-disabled="dataValue">My Button</button>
 		</div>
 	</body>
 </html>
