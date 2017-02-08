@@ -18,10 +18,12 @@
 					];
 
 					$scope.addNewItem = function(newItem) {
-						$scope.todos.push({
-							action : newItem.action + "(" + newItem.location + ")",
-							complete : false
-						});
+						if (angular.isDefined(newItem) && angular.isDefined(newItem.action) && angular.isDefined(newItem.location)){
+							$scope.todos.push({
+								action : newItem.action + "(" + newItem.location + ")",
+								complete : false
+							});
+						}
 					}
 				});
 		</script>
