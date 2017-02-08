@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app=exampleApp>
+	<head>
+		<title>Directives</title>
+		<script src="/angular/angular.min.js"></script>
+		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+
+		<script>
+			angular.module("exampleApp", [])
+				.controller("defaultCtrl", function($scope) {
+					$scope.data = {};
+
+					$scope.todos = [
+						{ action : "Get groceries", complete : false},
+						{ action : "Buy Flowers", complete : false},
+						{ action : "Get Shoes", complete : true},
+						{ action : "Collect Tickets", complete : false},
+						{ action : "Call Joe", complete : false},
+					];
+
+					$scope.buttonNames = ["Red", "Green", "Blue"];
+
+					$scope.data = {
+						rowColor : "Blue",
+						columnColor : "Green"
+					};
+
+					$scope.handleEvent = function(e) {
+						console.log("Event type : " + e.type);
+						$scope.data.columnColor = e.type == "mouseover" ? "Green" : "Blue";
+					}
+				});
+		</script>
+	</head>
+
+	<body>
+		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+			<h3 class="panel-header">
+				To Do List
+				<span class="label label-info">
+					{{(todos | filter : {complete : 'false'}).length}}
+				</span>
+			</h3>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Action</th>
+						<th>Done</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="item in todos" ng-class="data.rowColor" ng-mouseenter="handleEvent($event)" ng-mouseleave="handleEvent($event)">
+					<td>{{$index + 1}}</td>
+					<td>{{item.action}}</td>
+					<td>
+						{{item.complete}}
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
