@@ -16,6 +16,26 @@
 					$scope.message = "Ready";
 				});
 		</script>
+		<style>
+			form .ng-invalid.ng-dirty {
+				background-color: lightpink;
+			}
+
+			form .ng-valid.ng-dirty {
+				background-color: lightgreen;
+			}
+
+			span.summary.ng-invalid {
+				color : red;
+				font-weight : bold;
+			}
+
+			span.summary.ng-valid {
+				color : green;
+			}
+
+
+		</style>
 	</head>
 
 	<body>
@@ -43,7 +63,10 @@
 				<div class="well">
 					Message : {{message}}
 					<div>
-						Valid : {{myForm.$valid}}
+						Valid : 
+						<span class="summary" ng-class="myForm.$valid ? 'ng-valid' : 'ng-invalid'">
+							{{myForm.$valid}}
+						</span>
 					</div>
 				</div>
 			</form>
