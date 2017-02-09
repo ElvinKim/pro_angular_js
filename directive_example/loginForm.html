@@ -13,6 +13,16 @@
 						$scope.message = userDetails.name + " (" + userDetails.email + ") (" + userDetails.agreed + ")";
 					}
 
+					$scope.getError = function(error) {
+						if (angular.isDefined(error)) {
+							if (error.required) {
+								return "Please enter a value";
+							} else if (error.email) {
+								return "Please enter a valid email address";
+							}
+						}
+					}
+
 					$scope.message = "Ready";
 				});
 		</script>
@@ -55,12 +65,7 @@
 						<input name="userEmail" type="email" class="form-control" required ng-model="newUser.email">
 
 						<div class="error" ng-show="myForm.userEmail.$invalid && myForm.userEmail.$dirty">
-							<span ng-show="myForm.userEmail.$error.email">
-								Please enter a vali email address
-							</span>
-							<span ng-show="myForm.userEmail.$.error.required">
-								Please enter a value
-							</span>
+							{{getError(myForm.userEmail.$error)}}
 						</div>
 					</div>
 					<div class="checkbox">
