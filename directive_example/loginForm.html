@@ -34,7 +34,10 @@
 				color : green;
 			}
 
-
+			div.error {
+				color: red;
+				font-weight: bold;
+			}
 		</style>
 	</head>
 
@@ -50,6 +53,15 @@
 					<div class="form-group">
 						<label>Email:</label>
 						<input name="userEmail" type="email" class="form-control" required ng-model="newUser.email">
+
+						<div class="error" ng-show="myForm.userEmail.$invalid && myForm.userEmail.$dirty">
+							<span ng-show="myForm.userEmail.$error.email">
+								Please enter a vali email address
+							</span>
+							<span ng-show="myForm.userEmail.$.error.required">
+								Please enter a value
+							</span>
+						</div>
 					</div>
 					<div class="checkbox">
 						<label>
