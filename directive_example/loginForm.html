@@ -10,7 +10,11 @@
 			angular.module("exampleApp", [])
 				.controller("defaultCtrl", function($scope) {
 					$scope.addUser = function(userDetails) {
-						$scope.message = userDetails.name + " (" + userDetails.email + ") (" + userDetails.agreed + ")";
+						if(myForm.$valid) {
+							$scope.message = userDetails.name + " (" + userDetails.email + ") (" + userDetails.agreed + ")";
+						} else {
+							$scope.showValidation = true;
+						}
 					}
 
 					$scope.getError = function(error) {
@@ -27,21 +31,12 @@
 				});
 		</script>
 		<style>
-			form .ng-invalid.ng-dirty {
+			form.validate .ng-invalid-requried.ng-dirty {
 				background-color: lightpink;
 			}
 
-			form .ng-valid.ng-dirty {
-				background-color: lightgreen;
-			}
-
-			span.summary.ng-invalid {
-				color : red;
-				font-weight : bold;
-			}
-
-			span.summary.ng-valid {
-				color : green;
+			form.validate .ng-invalid-email.ng-dirty {
+				background-color: lightgoldenrodyellow;
 			}
 
 			div.error {
@@ -53,7 +48,7 @@
 
 	<body>
 		<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
-			<form name="myForm" novalidate ng-submit="addUser(newUser)">
+			<form name="myForm" novalidate ng-submit="addUser(newUser)" ng-class="showValidation ? 'validate' : ''">
 				<div class="well">
 					<div class="form-group">
 						<label>Name:</label>
@@ -64,8 +59,8 @@
 						<label>Email:</label>
 						<input name="userEmail" type="email" class="form-control" required ng-model="newUser.email">
 
-						<div class="error" ng-show="myForm.userEmail.$invalid && myForm.userEmail.$dirty">
-							{{getError(myForm.userEmail.$error)}}
+						<div class="error" ng-show="showValidation">
+							{{getError(myForm.userEmail.$errorr)}}
 						</div>
 					</div>
 					<div class="checkbox">
@@ -74,7 +69,7 @@
 							I agree to the terms and conditions
 						</label>
 					</div>
-					<button type="submit" class="btn btn-primary btn-block" ng-disabled="myForm.$invalid">OK</button>
+					<button type="submit" class="btn btn-primary btn-block">OK</button>
 				</div>
 
 				<div class="well">
