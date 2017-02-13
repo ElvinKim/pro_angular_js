@@ -8,41 +8,50 @@
 
 		<script>
 			angular.module("exampleApp", [])
-				.controller("simpleCtrl", function($scope) {
-					$scope.addresses = {}
+				.controller("simpleCtrl", function($scope, $rootScope) {
+
+					$scope.$on("zipCodeUpdated", function(event, args){
+						$scope[args.type] = args.zipCode;
+						console.log(args);
+					});
 
 					$scope.setAddress = function(type, zip) {
+						$rootScope.$broadcast("zipCodeUpdated", {
+							type : type,
+							zipCode : zip,
+							testValue : "test"
+						});
+
 						console.log("Type: " + type + " " + zip);
-						$scope.addresses[type] = zip;
 					}
 
 					$scope.copyAddress = function() {
-						$scope.shippingZip = $scope.billingZip;
+						$scope.zip = $scope.billingZip;
 					}
 				});
 		</script>
 	</head>
 
-	<body ng-controller="simpleCtrl">
-		<div class="well">
+	<body>
+		<div class="well" ng-controller="simpleCtrl">
 			<h4>Billing Zip Code</h4>
 			<div class="form-group">
-				<input class="form-control" ng-model="billingZip" />
+				<input class="form-control" ng-model="zip" />
 			</div>
-			<button class="btn btn-primary" ng-click="setAddress('billingZip', billingZip)">
+			<button class="btn btn-primary" ng-click="setAddress('billingZip', zip)">
 				Save Billing
 			</button>
 		</div>
 
-		<div class="well">
+		<div class="well" ng-controller="simpleCtrl">
 			<h4>Shipping Zip Code</h4>
 			<div class="form-group">
-				<input class="form-control" ng-model="shippingZip" />
+				<input class="form-control" ng-model="zip" />
 			</div>
 			<button class="btn btn-primary" ng-click="copyAddress()">
 				Use Billing
 			</button>
-			<button class="btn btn-primary" ng-click="setAddress('shippingZip', shippingZip)">
+			<button class="btn btn-primary" ng-click="setAddress('shippingZip', zip)">
 				Save Shipping
 			</button>
 		</div>
