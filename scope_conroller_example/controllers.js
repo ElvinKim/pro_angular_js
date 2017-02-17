@@ -35,6 +35,6 @@ app.controller("secondChildCtrl", function($scope){
 			result.push(index < 4 ? char.toUpperCase() : char)
 		});
 
-		$sope.dataValue = result.join("");
+		$scope.dataValue = result.join("");
 	};
 });
